@@ -1,0 +1,350 @@
+/* 基础样式 + 手机适配 */
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  background-color: #fff5f5;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 加载动画 */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.heart {
+  width: 50px;
+  height: 50px;
+  background: #ff9e9e;
+  transform: rotate(45deg);
+  animation: heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: rotate(45deg) scale(1);
+  }
+  25% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1);
+  }
+  75% {
+    transform: rotate(45deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+}
+
+/* 容器适配手机 */
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0; /* 初始隐藏，等加载完成再显示 */
+  transition: opacity 0.5s;
+}
+
+/* 主标题 */
+.main-title {
+  color: #ff6b6b;
+  font-size: 2em; /* 手机端字号调小 */
+  margin-bottom: 20px;
+}
+
+/* 温暖小任务 */
+.task {
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task:hover {
+  color: #ff6b6b;
+  transform: scale(1.05);
+}
+
+.task-icon {
+  display: inline-block;
+  margin-right: 8px;
+  transition: transform 0.5s ease;
+}
+
+.rotating {
+  animation: rotating 2s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 增加欢乐的动画效果 */
+.bounce {
+  animation: bounce 0.8s ease infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.shake {
+  animation: shake 0.8s ease infinite;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.wobble {
+  animation: wobble 1s ease infinite;
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+/* 回忆照片墙 */
+.memory-wall {
+  position: relative;
+  margin: 20px 0;
+}
+
+.photo-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  touch-action: pan-y; /* 支持触摸滑动 */
+}
+
+.photo {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  display: none;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+}
+
+.photo.active {
+  display: block;
+}
+
+.photo.slide-left-out {
+  animation: slideLeftOut 0.5s forwards;
+}
+
+.photo.slide-right-out {
+  animation: slideRightOut 0.5s forwards;
+}
+
+.photo.slide-left-in {
+  display: block;
+  animation: slideLeftIn 0.5s forwards;
+}
+
+.photo.slide-right-in {
+  display: block;
+  animation: slideRightIn 0.5s forwards;
+}
+
+@keyframes slideLeftOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideRightOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideLeftIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRightIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 添加箭头样式 */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #ff6b6b;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.arrow:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.photo-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+.photo-caption {
+  margin-top: 10px;
+  font-size: 1.1em;
+  color: #ff6b6b;
+  animation: wobble 2s ease infinite;
+}
+
+/* 音乐按钮 */
+.music-btn {
+  background: transparent;
+  border: 2px solid #ff9e9e;
+  color: #ff6b6b;
+  padding: 8px 15px;
+  border-radius: 50px;
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+/* 紧急呼叫按钮 */
+.emergency-btn {
+  background-color: #ff9e9e;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+}
+
+.emergency-btn:hover {
+  background-color: #ff6b6b;
+  transform: scale(1.05);
+}
+
+/* 手机适配 */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 1.8em;
+  }
+  .task {
+    font-size: 1em;
+  }
+  .emergency-btn {
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>给 刘亦菲 的小太阳 ☀️</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 加载动画 -->
+    <div class="loader">
+      <div class="heart"></div>
+    </div>
+
+    <div class="container">
+      <!-- 主标题（带渐显动画） -->
+      <h1 class="main-title animate__animated animate__fadeInDown">
+        风吹哪页读哪页，没事的！
+      </h1>
+
+      <!-- 温暖小任务（带心跳动画） -->
+      <div class="hug-list">
+        <p class="task animate__animated animate__fadeIn animate__delay-1s">
+          <span class="task-icon">☀️</span> 去晒3分钟太阳
+        </p>
+        <p class="task animate__animated animate__fadeIn animate__delay-1s">
+          <span class="task-icon">🎵</span> 大声哼完一首歌
+        </p>
+        <p class="task animate__animated animate__fadeIn animate__delay-1s">
+          <span class="task-icon">🐻</span> 用力抱抱毛绒玩具
+        </p>
+      </div>
+
+      <!-- 回忆照片墙（带左右滑动动画） -->
+      <div
+        class="memory-wall animate__animated animate__fadeIn animate__delay-2s"
+      >
+        <div class="photo-container">
+          <img src="./assets/1.jpg" alt="回忆照片1" class="photo active" />
+          <img src="./assets/2.jpg" alt="回忆照片2" class="photo" />
+
+          <div class="photo-nav">
+            <span class="nav-dot active" data-index="0"></span>
+            <span class="nav-dot" data-index="1"></span>
+          </div>
+
+          <!-- 添加左右箭头 -->
+          <div class="arrow arrow-left">❮</div>
+          <div class="arrow arrow-right">❯</div>
+        </div>
+        <p class="photo-caption">看！这是上次你笑得很开心的样子 😊</p>
+      </div>
+
+      <!-- 背景音乐开关（手机静音策略） -->
+      <button id="music-btn" class="music-btn">🎵 播放音乐</button>
+
+      <!-- 紧急呼叫按钮（悬停放大） -->
+      <button
+        class="emergency-btn animate__animated animate__pulse animate__infinite"
+      >
+        🆘 紧急呼叫我
+      </button>
+    </div>
+
+    <!-- 背景音乐（可选） -->
+    <audio id="bg-music" loop>
+      <source src="soft-piano.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
