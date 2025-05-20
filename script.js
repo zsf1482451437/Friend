@@ -37,23 +37,25 @@ window.addEventListener("load", function () {
     });
   });
 
-  // 背景音乐控制
-  const musicBtn = document.getElementById("music-btn");
+  // 自动播放背景音乐（解决自动播放限制）
   const bgMusic = document.getElementById("bg-music");
-  let isMusicPlaying = false;
+  if (bgMusic) {
+    // 尝试自动播放
+    const playPromise = bgMusic.play();
 
-  if (musicBtn && bgMusic) {
-    // 添加空值检查
-    musicBtn.addEventListener("click", function () {
-      if (isMusicPlaying) {
-        bgMusic.pause();
-        musicBtn.textContent = "🎵 播放音乐";
-      } else {
-        bgMusic.play();
-        musicBtn.textContent = "🔇 暂停音乐";
-      }
-      isMusicPlaying = !isMusicPlaying;
-    });
+    // 处理可能的播放失败（浏览器策略限制）
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        // 当用户与页面交互时再次尝试播放
+        document.addEventListener(
+          "click",
+          function () {
+            bgMusic.play();
+          },
+          { once: true }
+        );
+      });
+    }
   }
 
   // 紧急呼叫按钮跳转微信
