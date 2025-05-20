@@ -37,25 +37,61 @@ window.addEventListener("load", function () {
     });
   });
 
-  // 自动播放背景音乐（解决自动播放限制）
+  // 改进的音乐播放方案
   const bgMusic = document.getElementById("bg-music");
   if (bgMusic) {
-    // 尝试自动播放
+    // 尝试多种方法播放音乐
+
+    // 方法1：尝试直接播放
     const playPromise = bgMusic.play();
 
-    // 处理可能的播放失败（浏览器策略限制）
     if (playPromise !== undefined) {
       playPromise.catch((error) => {
-        // 当用户与页面交互时再次尝试播放
-        document.addEventListener(
-          "click",
-          function () {
-            bgMusic.play();
-          },
-          { once: true }
-        );
+        console.log("自动播放被阻止:", error);
+
+        // 方法2：添加可见的音乐控制按钮
+        const musicBtn = document.createElement("button");
+        musicBtn.innerHTML = "🎵 点击播放音乐";
+        musicBtn.className = "music-btn visible";
+        musicBtn.style.position = "fixed";
+        musicBtn.style.bottom = "20px";
+        musicBtn.style.right = "20px";
+        musicBtn.style.zIndex = "999";
+        musicBtn.style.padding = "10px";
+        musicBtn.style.background = "#ff9e9e";
+        musicBtn.style.border = "none";
+        musicBtn.style.borderRadius = "50px";
+        musicBtn.style.color = "white";
+        musicBtn.style.cursor = "pointer";
+
+        musicBtn.addEventListener("click", function () {
+          bgMusic.play();
+          this.style.display = "none";
+        });
+
+        document.body.appendChild(musicBtn);
+
+        // 方法3：任何用户交互都尝试播放音乐
+        const playOnInteraction = function () {
+          bgMusic.play();
+          document.removeEventListener("click", playOnInteraction);
+          document.removeEventListener("touchstart", playOnInteraction);
+          document.removeEventListener("keydown", playOnInteraction);
+
+          // 如果有音乐按钮，也隐藏掉
+          if (musicBtn) {
+            musicBtn.style.display = "none";
+          }
+        };
+
+        document.addEventListener("click", playOnInteraction);
+        document.addEventListener("touchstart", playOnInteraction);
+        document.addEventListener("keydown", playOnInteraction);
       });
     }
+
+    // 确保音量适中
+    bgMusic.volume = 0.5;
   }
 
   // 紧急呼叫按钮跳转微信
